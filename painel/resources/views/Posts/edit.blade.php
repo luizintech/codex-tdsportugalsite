@@ -44,12 +44,19 @@
 
 @section('scripts')
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://cdn.tiny.cloud/1/kfnmoaldqf9jc4d4dpg2wmzv2rz2hkcz0uz07bxg115st19i/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
   <script>
     $(document).ready(function() {
         $('.select2').select2({
             width: '100%',
             placeholder: "(ESCOLHA)",
             allowClear: true
+        });
+
+        tinymce.init({
+          selector: '#postContent',
+          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
         });
     });
 

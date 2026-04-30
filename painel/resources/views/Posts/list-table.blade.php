@@ -24,7 +24,12 @@
                     <button type="submit" class="badge badge-danger p-2 delete-user">Remover</button>
                 </form>
             </td>
-            <td>{{ $Post->coverMedia?->filename ?? '-' }}</td>
+            <td>
+                <a href="{{url('uploads/medias')}}/{{ $Post->coverMedia?->filename }}" target="_blank">
+                    <img src="{{url('uploads/medias')}}/{{ $Post->coverMedia?->filename }}"
+                        alt="{{$Post->coverMedia?->filename ?? '-'}}" />
+                </a>
+            </td>
             <td>{{$Post->title}}</td>
             <td>{{$Post->author}}</td>
             <td>{{$Post->slug}}</td>

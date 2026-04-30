@@ -28,3 +28,5 @@ Homestead.json
 .env.production
 .phpactor.json
 auth.json
+painel/public/uploads/medias/
+painel/vendor/
