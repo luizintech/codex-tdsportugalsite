@@ -1,0 +1,19 @@
+RewriteBase /
+
+RewriteEngine On
+
+RewriteRule ^quem-somos$ quem-somos.php [L,QSA]
+RewriteRule ^contato$ contato.php [L,QSA]
+RewriteRule ^404-nao-encontrado$ 404.php [L,QSA]
+
+# sitemaps
+RewriteRule ^sitemap$ sitemap/index.php [L,QSA]
+RewriteRule ^sitemap/posts_sitemap$ sitemap/post_sitemap.php [L,QSA]
+RewriteRule ^sitemap/categories_sitemap$ sitemap/category_sitemap.php [L,QSA]
+RewriteRule ^sitemap/labels_sitemap$ sitemap/label_sitemap.php [L,QSA]
+RewriteRule ^sitemap/pages_sitemap$ sitemap/page_sitemap.php [L,QSA]
+
+# dynamic content
+RewriteRule ^categorias/([a-zA-Z0-9-]+)/?$ category.php?slug=$1 [L,QSA]
+RewriteRule ^topicos/([a-zA-Z0-9-]+)/?$ label.php?slug=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9-]+)/?$ post.php?slug=$1 [L,QSA]

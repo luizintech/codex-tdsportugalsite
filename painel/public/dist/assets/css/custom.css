@@ -1,0 +1,76 @@
+.logo-wrapper {}
+.logo-wrapper img {
+    border: 1px solid #999;
+    border-radius: 50%;
+    width: 128px;
+}
+.channel-name {
+    margin: 10px 0 0 0;
+}
+.channel-name h1 {
+    font-size: 16px;
+}
+
+.recommendations {
+    margin: 20px 0;
+}
+
+.product-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.product-wrapper img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.product-wrapper .description {
+    margin: 10px 0 0 0;
+    text-align: center;
+    flex-grow: 1;
+    margin-top: 10px;
+    font-size: 12px;
+    padding: 10px 0;
+}
+
+.product-wrapper .btn-buy {
+    margin-top: auto;
+    width: 100%;
+}
+
+.product-margin-space {
+    margin: 10px 0;
+}
+
+/* lead */
+#lead-form {
+    background-color: #d689ff;
+    color: #555;
+    padding: 30px 15px;
+}
+
+#lead-form .form-control {
+    border: 1px solid #555;
+}
+
+#lead-form ::placeholder {
+    color: #555;
+}
+
+/* footer */
+#main-footer {
+    background-color: #222;
+    color: #fff;
+    min-height: 50px;
+}
+
+#main-footer .footer-wrapper{
+    padding: 30px 0;
+}
+.select2-container .select2-selection--single {
+    height: 60px!important;
+}
