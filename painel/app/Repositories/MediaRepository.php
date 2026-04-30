@@ -87,8 +87,7 @@ class MediaRepository {
 
         $result->total = Media::count();
 
-        $result->objectResult = Media::with('youtube')
-            ->orderBy('created_at', 'DESC')
+        $result->objectResult = Media::orderBy('created_at', 'DESC')
             ->skip(($YoutubeGrowth - 1) * $size)
             ->take($size)
             ->get();
