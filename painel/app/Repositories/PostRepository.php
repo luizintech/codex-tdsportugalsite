@@ -87,8 +87,7 @@ class PostRepository {
 
         $result->total = Post::count();
 
-        $result->objectResult = Post::with('youtube')
-            ->orderBy('created_at', 'DESC')
+        $result->objectResult = Post::orderBy('created_at', 'DESC')
             ->skip(($YoutubeGrowth - 1) * $size)
             ->take($size)
             ->get();
