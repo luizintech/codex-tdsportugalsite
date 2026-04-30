@@ -53,8 +53,8 @@
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Labels">Rotulos</a></li>
 			      <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Categories">Categorias</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{url('')}}/medias">Midias</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{url('')}}/posts">Artigos</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Medias">Midias</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Posts">Artigos</a></li>
           </ul>
         </div>
       </li>
