@@ -21,7 +21,7 @@ class PostRepository {
 
     public function getById($id): Result{
         $result = new Result;
-        $result->objectResult = Post::find($id);
+        $result->objectResult = Post::with(['labels', 'categories', 'coverMedia'])->find($id);
 
         if (!$result->objectResult) {
             $result->messages = "Não foi possível recuperar o objeto";
@@ -44,8 +44,11 @@ class PostRepository {
         $current->fill($entity);
         $current->save();
 
-        if ($current->id > 0)
+        if ($current->id > 0) {
+            $result->id = $current->id;
+
             $result->success = true;
+        }
 
         return $result;
     }
@@ -53,7 +56,7 @@ class PostRepository {
     public function update($id, $entity): Result{
         $result = new Result;
 
-        $current = Post::find($id);
+        $current = Post::with(['labels', 'categories', 'coverMedia'])->find($id);
         if (!$current) {
             $result->messages = "Não encontrado.";
             return $result;
@@ -61,6 +64,7 @@ class PostRepository {
 
         $current->fill($entity);
         $current->save();
+        $result->id = $current->id;
         $result->success = true;
 
         return $result;
@@ -69,15 +73,34 @@ class PostRepository {
     public function delete($id): Result {
         $result = new Result;
 
-        $current = Post::find($id);
+        $current = Post::with(['labels', 'categories', 'coverMedia'])->find($id);
         if (!$current) {
             $result->messages = "Não encontrado.";
             return $result;
         }
 
         $current->delete();
+        $result->id = $id;
         $result->success = true;
 
+        return $result;
+    }
+
+
+    public function syncRelations($postId, array $labelIds, array $categoryIds): Result {
+        $result = new Result;
+
+        $current = Post::find($postId);
+        if (!$current) {
+            $result->messages = "Não encontrado.";
+            return $result;
+        }
+
+        $current->labels()->sync($labelIds);
+        $current->categories()->sync($categoryIds);
+
+        $result->id = $current->id;
+        $result->success = true;
         return $result;
     }
 
@@ -87,8 +110,7 @@ class PostRepository {
 
         $result->total = Post::count();
 
-        $result->objectResult = Post::with('youtube')
-            ->orderBy('created_at', 'DESC')
+        $result->objectResult = Post::with(['coverMedia'])->orderBy('created_at', 'DESC')
             ->skip(($YoutubeGrowth - 1) * $size)
             ->take($size)
             ->get();

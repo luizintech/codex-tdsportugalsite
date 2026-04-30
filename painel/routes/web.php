@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LabelController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -31,3 +32,11 @@ Route::get('Categories/edit/{id}', [CategoryController::class, 'edit']);
 Route::post('Categories/edit/{id}', [CategoryController::class, 'update']);
 Route::delete('Categories/delete/{id}', [CategoryController::class, 'delete']);
 Route::get('Categories/view/{id}', [CategoryController::class, 'view']);
+//Posts
+Route::get('Posts', [PostController::class, 'index']);
+Route::get('Posts/page/{pageId}', [PostController::class, 'indexPage']);
+Route::get('Posts/create', [PostController::class, 'create']);
+Route::post('Posts/create', [PostController::class, 'doCreation']);
+Route::get('Posts/edit/{id}', [PostController::class, 'edit']);
+Route::post('Posts/edit/{id}', [PostController::class, 'update']);
+Route::delete('Posts/delete/{id}', [PostController::class, 'delete']);
