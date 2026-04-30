@@ -171,6 +171,8 @@ class PostController extends BaseController
             'content' => $request->get('content'),
             'author' => $request->get('author'),
             'slug' => $request->get('slug'),
+            'publish_date' => $request->get('publish_date'),
+            'is_published' => $request->boolean('is_published'),
             'cover_media_id' => $request->get('cover_media_id') ?: null
         ];
     }
@@ -181,6 +183,8 @@ class PostController extends BaseController
             'content' => 'required',
             'author' => 'required',
             'slug' => 'required',
+            'publish_date' => 'required|date',
+            'is_published' => 'required|boolean',
             'cover_media_id' => 'nullable|exists:medias,id',
             'label_ids' => 'nullable|array',
             'label_ids.*' => 'exists:labels,id',
