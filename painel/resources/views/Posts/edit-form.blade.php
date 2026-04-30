@@ -12,7 +12,7 @@
 <div class="col-md-12 form-group">
     <label class="control-label">Autor:</label>
     <input type="text" name="author" class="form-control" required maxlength="50"
-        value="<?= isset($viewModel->objectReturn) ? $viewModel->objectReturn->author : ''; ?>" />
+        value="<?= isset($viewModel->objectReturn) ? $viewModel->objectReturn->author : 'admin'; ?>" />
 </div>
 
 <div class="col-md-12 form-group">

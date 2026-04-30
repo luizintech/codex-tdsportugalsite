@@ -33,6 +33,7 @@ Route::get('Categories/edit/{id}', [CategoryController::class, 'edit']);
 Route::post('Categories/edit/{id}', [CategoryController::class, 'update']);
 Route::delete('Categories/delete/{id}', [CategoryController::class, 'delete']);
 Route::get('Categories/view/{id}', [CategoryController::class, 'view']);
+
 //Medias
 Route::get('Medias', [MediaController::class, 'index']);
 Route::get('Medias/page/{pageId}', [MediaController::class, 'indexPage']);

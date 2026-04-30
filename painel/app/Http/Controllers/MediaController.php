@@ -147,13 +147,12 @@ class MediaController extends BaseController
 
     private function populate(Request $request, bool $isUpdate = false): Array{
         $entity = [
-            'path' => $request->get('path'),
             'slug' => $request->get('slug')
         ];
 
         $imageFile = $request->file('image_file');
         if ($imageFile) {
-            $filename = time() . '_' . uniqid() . '.' . $imageFile->getClientOriginalExtension();
+            $filename = $entity['slug'] . '_' . uniqid() . '.' . $imageFile->getClientOriginalExtension();
             $destinationPath = public_path('uploads/medias');
 
             if (!is_dir($destinationPath)) {
@@ -166,8 +165,6 @@ class MediaController extends BaseController
             if (empty($entity['path'])) {
                 $entity['path'] = '/uploads/medias/' . $filename;
             }
-        } elseif (!$isUpdate) {
-            $entity['filename'] = $request->get('filename');
         }
 
         return $entity;
