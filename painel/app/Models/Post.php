@@ -13,6 +13,8 @@ class Post extends Model
         'content',
         'author',
         'slug',
+        'publish_date',
+        'is_published',
         'cover_media_id'
     ];
 
