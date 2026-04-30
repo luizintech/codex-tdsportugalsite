@@ -3,12 +3,12 @@
 @section('content')
     
 <div class="page-header">
-    <h3 class="page-title"> Editar categoria - <?= $viewModel->objectReturn->title; ?> </h3>
+    <h3 class="page-title"> Editar post - <?= $viewModel->objectReturn->title; ?> </h3>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{url('')}}/">Dashboard</a></li>
-        <li class="breadcrumb-item" href="{{url('../')}}/Posts" aria-current="page">Post</li>
-        <li class="breadcrumb-item active" aria-current="page">Editar categoria</li>
+        <li class="breadcrumb-item" href="{{url('../')}}/Posts" aria-current="page">Posts</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar post</li>
       </ol>
     </nav>
 </div>
@@ -59,5 +59,22 @@
             allowClear: true
         });
     });
+
+    $(document).on('click', '.choose-media', function() {
+        const id = $(this).data('id');
+        const name = $(this).data('name');
+        $('#cover_media_id').val(id);
+        $('#cover_media_name').val(name);
+        $('#mediaPickerModal').modal('hide');
+    });
+
+    $('#media-search').on('keyup', function() {
+        const term = $(this).val().toLowerCase();
+        $('#media-picker-table tbody tr').each(function(){
+            const txt = $(this).text().toLowerCase();
+            $(this).toggle(txt.indexOf(term) > -1);
+        });
+    });
+
   </script>
 @endsection

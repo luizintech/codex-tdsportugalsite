@@ -4,6 +4,7 @@
         <th>ID</th>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
+        <th>Capa</th>
         <th>Título</th>
         <th>Autor</th>
         <th>Slug</th>
@@ -23,6 +24,7 @@
                     <button type="submit" class="badge badge-danger p-2 delete-user">Remover</button>
                 </form>
             </td>
+            <td>{{ $Post->coverMedia?->filename ?? '-' }}</td>
             <td>{{$Post->title}}</td>
             <td>{{$Post->author}}</td>
             <td>{{$Post->slug}}</td>
