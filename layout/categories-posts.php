@@ -37,7 +37,7 @@ $total_paginas = (int)ceil($total_posts / $posts_por_pagina);
     <div class="row">
         <?php if ($result): while ($postCategory = $result->fetch_assoc()): ?>
             <?php $imageUrl = !empty($postCategory['media_path']) && !empty($postCategory['media_filename'])
-                ? $baseUrl . '/' . trim($postCategory['media_path'], '/') . '/' . rawurlencode($postCategory['media_filename'])
+                ? $baseUrl . '/painel/' . trim($postCategory['media_path'], '/')
                 : $baseUrl . '/assets/images/blog-post-01.jpg'; ?>
             <div class="col-lg-12">
                 <div class="blog-post">
