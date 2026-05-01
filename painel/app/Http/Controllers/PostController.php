@@ -34,29 +34,37 @@ class PostController extends BaseController
         $this->mediaRepository = $mediaRepo;
     }
 
-    public function index() {
+    public function index(Request $request) {
         if (!Auth::check()) return Redirect::to('login');
 
         $viewModel = new PostViewModel();
         $viewModel->pageId = 1;
         $viewModel->pageSize = 10;
         $viewModel->resourceLink = "Posts";
+        $viewModel->labels = $this->labelRepository->listAll()->objectResult ?? [];
+        $viewModel->categories = $this->categoryRepository->listAll()->objectResult ?? [];
 
-        $posts = $this->postRepository->listAllPaging($viewModel->pageId, $viewModel->pageSize);
+        $filters = $this->extractFilters($request);
+        $posts = $this->postRepository->listAllPaging($viewModel->pageId, $viewModel->pageSize, $filters);
+        $viewModel->filters = $filters;
         $viewModel->totalItems = $posts->total;
         $viewModel->objectReturn = $posts->objectResult;
         return view('Posts/index', compact('viewModel'));
     }
 
-    public function indexPage($pageId) {
+    public function indexPage($pageId, Request $request) {
         if (!Auth::check()) return Redirect::to('login');
 
         $viewModel = new PostViewModel();
         $viewModel->pageId = $pageId;
         $viewModel->pageSize = 10;
         $viewModel->resourceLink = "Posts";
+        $viewModel->labels = $this->labelRepository->listAll()->objectResult ?? [];
+        $viewModel->categories = $this->categoryRepository->listAll()->objectResult ?? [];
 
-        $posts = $this->postRepository->listAllPaging($viewModel->pageId, $viewModel->pageSize);
+        $filters = $this->extractFilters($request);
+        $posts = $this->postRepository->listAllPaging($viewModel->pageId, $viewModel->pageSize, $filters);
+        $viewModel->filters = $filters;
         $viewModel->totalItems = $posts->total;
         $viewModel->objectReturn = $posts->objectResult;
         return view('Posts/index', compact('viewModel'));
@@ -163,6 +171,14 @@ class PostController extends BaseController
         $viewModel->selectedMediaId = old('cover_media_id', $viewModel->selectedMediaId);
         $viewModel->selectedLabels = old('label_ids', $viewModel->selectedLabels ?? []);
         $viewModel->selectedCategories = old('category_ids', $viewModel->selectedCategories ?? []);
+    }
+
+    private function extractFilters(Request $request): array {
+        return [
+            'title' => trim((string) $request->get('title', '')),
+            'category_id' => $request->get('category_id'),
+            'label_id' => $request->get('label_id'),
+        ];
     }
 
     private function populate(Request $request): Array{

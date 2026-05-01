@@ -13,4 +13,5 @@ class PostViewModel extends PaginationViewModel {
     public $selectedLabels;
     public $selectedCategories;
     public $selectedMediaId;
+    public $filters;
 }

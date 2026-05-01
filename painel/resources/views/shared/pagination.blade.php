@@ -10,7 +10,7 @@
                         $isActive = $viewModel->pageId == $i;    
                     ?>
                     <li class="page-item">
-                        <a class="page-link <?= $isActive ? "active" : "" ;?>" href="{{url('/painel')}}/{{$viewModel->resourceLink}}/page/{{$i}}">
+                        <a class="page-link <?= $isActive ? "active" : "" ;?>" href="{{url('/painel')}}/{{$viewModel->resourceLink}}/page/{{$i}}?{{ http_build_query($viewModel->filters ?? []) }}">
                             {{$i}}
                         </a>
                     </li>   
