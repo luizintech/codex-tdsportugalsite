@@ -1,19 +1,26 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>&nbsp;</th>
-        <th>&nbsp;</th>
         <th>Capa</th>
         <th>Título</th>
         <th>Autor</th>
         <th>Slug</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
     </tr>
     </thead>
     <tbody>
     @foreach ($viewModel->objectReturn as $Post)
         <tr>
-            <td class="maxwidth-btns-25px">{{$Post->id}}</td>
+            <td class="maxwidth-btns-25px">
+                <a href="{{url('uploads/medias')}}/{{ $Post->coverMedia?->filename }}" target="_blank">
+                    <img src="{{url('uploads/medias')}}/{{ $Post->coverMedia?->filename }}"
+                        alt="{{$Post->coverMedia?->filename ?? '-'}}" />
+                </a>
+            </td>
+            <td>{{$Post->title}}</td>
+            <td>{{$Post->author}}</td>
+            <td>{{$Post->slug}}</td>
             <td class="maxwidth-btns-25px">
                 <a href="{{url('')}}/Posts/edit/{{$Post->id}}" class="badge badge-success p-2">Editar</a>
             </td>
@@ -24,15 +31,6 @@
                     <button type="submit" class="badge badge-danger p-2 delete-user">Remover</button>
                 </form>
             </td>
-            <td>
-                <a href="{{url('uploads/medias')}}/{{ $Post->coverMedia?->filename }}" target="_blank">
-                    <img src="{{url('uploads/medias')}}/{{ $Post->coverMedia?->filename }}"
-                        alt="{{$Post->coverMedia?->filename ?? '-'}}" />
-                </a>
-            </td>
-            <td>{{$Post->title}}</td>
-            <td>{{$Post->author}}</td>
-            <td>{{$Post->slug}}</td>
         </tr>
     @endforeach
     </tbody>
