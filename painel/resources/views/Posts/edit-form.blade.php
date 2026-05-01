@@ -6,7 +6,7 @@
 
 <div class="col-md-12 form-group">
     <label class="control-label">Conteúdo:</label>
-    <textarea id="postContent" name="content" class="form-control" required rows="8"><?= old('content', isset($viewModel->objectReturn) ? $viewModel->objectReturn->content : ''); ?></textarea>
+    <textarea id="postContent" name="content" class="form-control" rows="8"><?= old('content', isset($viewModel->objectReturn) ? $viewModel->objectReturn->content : ''); ?></textarea>
 </div>
 
 <div class="col-md-12 form-group">

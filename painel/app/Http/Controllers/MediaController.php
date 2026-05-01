@@ -153,7 +153,7 @@ class MediaController extends BaseController
         $imageFile = $request->file('image_file');
         if ($imageFile) {
             $filename = $entity['slug'] . '_' . uniqid() . '.' . $imageFile->getClientOriginalExtension();
-            $destinationPath = public_path('uploads/medias');
+            $destinationPath = Env('UPLOAD_DIRECTORY');
 
             if (!is_dir($destinationPath)) {
                 mkdir($destinationPath, 0775, true);
