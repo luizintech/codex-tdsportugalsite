@@ -28,8 +28,8 @@
     {
         while ($category = $resultCategory->fetch_assoc())
         {
-            $categoryName =  $category['name'];
-            $categoryDescription =  $category['description'];
+            $categoryName =  $category['title'];
+            $categoryDescription =  $category['short_description'];
             $categorySlug =  $category['slug'];
         }
     }
