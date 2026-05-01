@@ -27,7 +27,7 @@
     {
         while ($category = $resultLabel->fetch_assoc())
         {
-            $categoryName =  $category['name'];
+            $categoryName =  $category['title'];
             $categorySlug =  $category['slug'];
         }
     }

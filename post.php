@@ -6,7 +6,7 @@
 
     $slug = '';
     if (!isset($_GET['slug']))
-    { 
+    {
         die();
     }
     $slug = $_GET['slug'];
@@ -17,11 +17,15 @@
         die("Falha na conexão: " . $conn->connect_error);
     }
 
-    $sql = "SELECT * FROM posts_highlights WHERE link = '".$slug."';";
+    $sql = "SELECT p.title, p.author, p.publish_date, p.slug, m.path AS media_path, m.filename AS media_filename
+            FROM posts p
+            LEFT JOIN medias m ON m.id = p.cover_media_id
+            WHERE p.slug = '".$slug."' AND p.is_published = 1
+            LIMIT 1";
     $resultPost = $conn->query($sql);
 
     $title = '';
-    $cover = '';
+    $cover = $baseUrl . '/assets/images/blog-post-01.jpg';
     $author = '';
     $date = '';
 
@@ -30,9 +34,11 @@
         while ($post = $resultPost->fetch_assoc())
         {
             $title =  $post['title'];
-            $cover =  $post['image_url'];
+            $cover = !empty($post['media_path']) && !empty($post['media_filename'])
+                ? $baseUrl . '/' . trim($post['media_path'], '/') . '/' . rawurlencode($post['media_filename'])
+                : $cover;
             $author =  $post['author'];
-            $date =  $post['published_at'];
+            $date =  $post['publish_date'];
         }
     }
 
@@ -42,15 +48,13 @@
     require_once "layout/header-body.php";
 ?>
 
-    <!-- Page Content -->
-    <!-- Banner Starts Here -->
     <div class="heading-page header-text">
       <section class="page-heading">
         <div class="container">
           <div class="row">
             <div class="col-lg-12">
               <div class="text-content">
-                <h4><?= $title; ?></h4>
+                <h4><?= htmlspecialchars($title); ?></h4>
               </div>
             </div>
           </div>
@@ -65,7 +69,7 @@
             <?php
               $filePath = "content/{$slug}.txt";
 
-              if (file_exists($filePath)) {
+              if (file_exists($filePath) && !empty($title)) {
                   $content = file_get_contents($filePath);
               ?>
               <div class="all-blog-posts">
@@ -73,12 +77,12 @@
                   <div class="col-lg-12">
                     <div class="blog-post">
                       <div class="blog-thumb">
-                        <img src="<?= $cover; ?>" alt="<?= $title; ?>">
+                        <img src="<?= htmlspecialchars($cover); ?>" alt="<?= htmlspecialchars($title); ?>">
                       </div>
                       <div class="down-content">
-                        <h1><?= $title; ?></h1>
+                        <h1><?= htmlspecialchars($title); ?></h1>
                         <ul class="post-info">
-                          <li><a href="#"><?= $author; ?></a></li>
+                          <li><a href="#"><?= htmlspecialchars($author); ?></a></li>
                           <li><a href="#"><?= date("F d, Y", strtotime($date)); ?></a></li>
                         </ul>
                       </div>
@@ -101,7 +105,7 @@
       </div>
     </section>
 
-<?php 
+<?php
     require_once "layout/footer-body.php";
     require_once "layout/footer.php";
-?> 
+?>
