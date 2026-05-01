@@ -36,7 +36,7 @@
         {
             $title =  $post['title'];
             $cover = !empty($post['media_path']) && !empty($post['media_filename'])
-                ? $baseUrl . '/' . trim($post['media_path'], '/') . '/' . rawurlencode($post['media_filename'])
+                ? $baseUrl . '/painel/' . trim($post['media_path'], '/')
                 : $cover;
             $content = $post['content'] ?? '';
             $author =  $post['author'];
