@@ -29,7 +29,7 @@ $result = $conn->query($sql);
                 <?php while ($post = $result->fetch_assoc()): ?>
                     <?php
                     $imageUrl = !empty($post['media_path']) && !empty($post['media_filename'])
-                        ? $baseUrl . '/' . trim($post['media_path'], '/') . '/' . rawurlencode($post['media_filename'])
+                        ? $baseUrl . '/painel/' . trim($post['media_path'], '/')
                         : $baseUrl . '/assets/images/banner-item-01.jpg';
                     ?>
                     <div class="item">

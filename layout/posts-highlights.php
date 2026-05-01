@@ -34,8 +34,8 @@ $total_paginas = (int)ceil($total_posts / $posts_por_pagina);
 <div class="all-blog-posts">
     <div class="row">
         <?php if ($result): while ($post = $result->fetch_assoc()): ?>
-            <?php $imageUrl = !empty($post['media_path']) && !empty($post['media_filename'])
-                ? $baseUrl . '/' . trim($post['media_path'], '/') . '/' . rawurlencode($post['media_filename'])
+            <?php $imageUrl = !empty($post['media_path'])
+                ? $baseUrl . '/painel/' . trim($post['media_path'], '/')
                 : $baseUrl . '/assets/images/blog-post-01.jpg'; ?>
             <div class="col-lg-12">
                 <div class="blog-post">
