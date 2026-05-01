@@ -17,7 +17,7 @@
         die("Falha na conexão: " . $conn->connect_error);
     }
 
-    $sql = "SELECT p.title, p.author, p.publish_date, p.slug, m.path AS media_path, m.filename AS media_filename
+    $sql = "SELECT p.title, p.content, p.author, p.publish_date, p.slug, m.path AS media_path, m.filename AS media_filename
             FROM posts p
             LEFT JOIN medias m ON m.id = p.cover_media_id
             WHERE p.slug = '".$slug."' AND p.is_published = 1
@@ -25,6 +25,7 @@
     $resultPost = $conn->query($sql);
 
     $title = '';
+    $content = '';
     $cover = $baseUrl . '/assets/images/blog-post-01.jpg';
     $author = '';
     $date = '';
@@ -37,6 +38,7 @@
             $cover = !empty($post['media_path']) && !empty($post['media_filename'])
                 ? $baseUrl . '/' . trim($post['media_path'], '/') . '/' . rawurlencode($post['media_filename'])
                 : $cover;
+            $content = $post['content'] ?? '';
             $author =  $post['author'];
             $date =  $post['publish_date'];
         }
@@ -67,10 +69,7 @@
         <div class="row">
           <div class="col-lg-8">
             <?php
-              $filePath = "content/{$slug}.txt";
-
-              if (file_exists($filePath) && !empty($title)) {
-                  $content = file_get_contents($filePath);
+              if (!empty($title) && !empty($content)) {
               ?>
               <div class="all-blog-posts">
                 <div class="row">

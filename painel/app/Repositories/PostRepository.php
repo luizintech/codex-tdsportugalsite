@@ -105,12 +105,31 @@ class PostRepository {
     }
 
     //Other methods
-    public function listAllPaging($YoutubeGrowth, $size): Result {
+    public function listAllPaging($YoutubeGrowth, $size, array $filters = []): Result {
         $result = new Result;
 
-        $result->total = Post::count();
+        $query = Post::with(['coverMedia', 'labels', 'categories'])
+            ->orderBy('created_at', 'DESC');
 
-        $result->objectResult = Post::with(['coverMedia'])->orderBy('created_at', 'DESC')
+        if (!empty($filters['title'])) {
+            $query->where('title', 'like', '%' . $filters['title'] . '%');
+        }
+
+        if (!empty($filters['category_id'])) {
+            $query->whereHas('categories', function ($q) use ($filters) {
+                $q->where('categories.id', $filters['category_id']);
+            });
+        }
+
+        if (!empty($filters['label_id'])) {
+            $query->whereHas('labels', function ($q) use ($filters) {
+                $q->where('labels.id', $filters['label_id']);
+            });
+        }
+
+        $result->total = (clone $query)->count();
+
+        $result->objectResult = $query
             ->skip(($YoutubeGrowth - 1) * $size)
             ->take($size)
             ->get();
