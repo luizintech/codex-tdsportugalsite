@@ -42,7 +42,7 @@
           <?php if ($result && $result->num_rows > 0): ?>
               <?php while ($category = $result->fetch_assoc()): ?>
                 <li class="nav-item">
-                  <a class="nav-link" href="<?= $baseUrl; ?>/<?= $category_base; ?>/<?= $category['slug']; ?>"><?= $category['name']; ?></a>
+                  <a class="nav-link" href="<?= $baseUrl; ?>/<?= $category_base; ?>/<?= $category['slug']; ?>"><?= $category['title']; ?></a>
                 </li>
               <?php endwhile; ?>
           <?php endif; ?>
