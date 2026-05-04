@@ -1,0 +1,1 @@
+<table class="table table-striped"><thead><tr><th>ID</th><th>Nome</th><th>Mensagem</th><th>Tipo</th><th>Data</th></tr></thead><tbody>@foreach ($viewModel->objectReturn as $Log)<tr><td>{{$Log->id}}</td><td>{{$Log->name}}</td><td>{{$Log->message}}</td><td>{{$Log->type}}</td><td>{{$Log->created_at}}</td></tr>@endforeach</tbody></table>

@@ -55,6 +55,7 @@
 			      <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Categories">Categorias</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Medias">Midias</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Posts">Artigos</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Logs">Logs</a></li>
           </ul>
         </div>
       </li>
