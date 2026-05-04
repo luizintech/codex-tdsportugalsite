@@ -19,6 +19,25 @@ class LogRepository {
         return $result;
     }
 
+
+    public function listAllPaging($pageId, $size): Result {
+        $result = new Result;
+
+        $result->total = Log::count();
+        $result->objectResult = Log::orderBy('created_at', 'DESC')
+            ->skip(($pageId - 1) * $size)
+            ->take($size)
+            ->get();
+
+        if (!$result->objectResult) {
+            $result->messages = "Não foi possível listar os objetos";
+        } else {
+            $result->success = true;
+        }
+
+        return $result;
+    }
+
     public function getById($id): Result{
         $result = new Result;
         $result->objectResult = Log::find($id);

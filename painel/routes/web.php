@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LogController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -62,3 +63,7 @@ Route::post('Users/create', [UserController::class, 'doCreation']);
 Route::get('Users/edit/{id}', [UserController::class, 'edit']);
 Route::post('Users/edit/{id}', [UserController::class, 'update']);
 Route::delete('Users/delete/{id}', [UserController::class, 'delete']);
+
+//Logs
+Route::get('Logs', [LogController::class, 'index']);
+Route::get('Logs/page/{pageId}', [LogController::class, 'indexPage']);
