@@ -38,7 +38,7 @@
         </a>
         <div class="collapse" id="users">
           <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{{url('')}}/users">Usuários</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Users">Usuários</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{url('')}}/configurations">Configurações</a></li>
           </ul>
         </div>

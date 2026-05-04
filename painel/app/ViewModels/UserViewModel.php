@@ -7,4 +7,8 @@ class UserViewModel {
     public $message;
     public $isEditing;
     public $editId;
+    public $pageId;
+    public $pageSize;
+    public $totalItems;
+    public $resourceLink;
 }

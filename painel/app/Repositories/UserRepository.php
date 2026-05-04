@@ -75,6 +75,26 @@ class UserRepository {
         return $result;
     }
 
+
+
+    public function listAllPaging($pageId, $size): Result {
+        $result = new Result;
+
+        $result->total = User::count();
+        $result->objectResult = User::orderBy('created_at', 'DESC')
+            ->skip(($pageId - 1) * $size)
+            ->take($size)
+            ->get();
+
+        if (!$result->objectResult) {
+            $result->messages = "Não foi possível listar os objetos";
+        } else {
+            $result->success = true;
+        }
+
+        return $result;
+    }
+
     //Other methods
     public function getByEmail($email): Result{
         $result = new Result;

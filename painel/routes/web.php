@@ -6,6 +6,7 @@ use App\Http\Controllers\LabelController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -51,3 +52,13 @@ Route::post('Posts/create', [PostController::class, 'doCreation']);
 Route::get('Posts/edit/{id}', [PostController::class, 'edit']);
 Route::post('Posts/edit/{id}', [PostController::class, 'update']);
 Route::delete('Posts/delete/{id}', [PostController::class, 'delete']);
+
+
+//Users
+Route::get('Users', [UserController::class, 'index']);
+Route::get('Users/page/{pageId}', [UserController::class, 'indexPage']);
+Route::get('Users/create', [UserController::class, 'create']);
+Route::post('Users/create', [UserController::class, 'doCreation']);
+Route::get('Users/edit/{id}', [UserController::class, 'edit']);
+Route::post('Users/edit/{id}', [UserController::class, 'update']);
+Route::delete('Users/delete/{id}', [UserController::class, 'delete']);
