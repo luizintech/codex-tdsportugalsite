@@ -166,31 +166,33 @@
                   <?php } else { ?>
                     <ul>
                       <?php foreach ($rootComments as $comment) { ?>
-                        <li>
-                          <div class="author-thumb">
-                            <img src="<?= $baseUrl; ?>/assets/images/comment-author-01.jpg" alt="">
-                          </div>
-                          <div class="right-content">
-                            <h4><?= htmlspecialchars($comment['name']); ?><span><?= date("d/m/Y H:i", strtotime($comment['created_at'])); ?></span></h4>
-                            <p><?= nl2br(htmlspecialchars($comment['text'])); ?></p>
 
-                            <?php if (!empty($answerComments[$comment['id']])) { ?>
-                              <ul style="margin-top: 15px; padding-left: 35px;">
-                                <?php foreach ($answerComments[$comment['id']] as $answer) { ?>
-                                  <li>
-                                    <div class="author-thumb">
-                                      <img src="<?= $baseUrl; ?>/assets/images/comment-author-02.jpg" alt="">
-                                    </div>
-                                    <div class="right-content">
-                                      <h4><?= htmlspecialchars($answer['name']); ?><span><?= date("d/m/Y H:i", strtotime($answer['created_at'])); ?></span></h4>
-                                      <p><?= nl2br(htmlspecialchars($answer['text'])); ?></p>
-                                    </div>
-                                  </li>
-                                <?php } ?>
-                              </ul>
-                            <?php } ?>
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="right-content">
+                              <h5><?= htmlspecialchars($comment['name']); ?>&nbsp;-&nbsp;<span><?= date("d/m/Y H:i", strtotime($comment['created_at'])); ?></span></h5>
+                              <p><?= nl2br(htmlspecialchars($comment['text'])); ?></p>
+
+                              <?php if (!empty($answerComments[$comment['id']])) { ?>
+
+                                <ul style="margin-top: 15px; padding-left: 35px;">
+                                    <?php foreach ($answerComments[$comment['id']] as $answer) { ?>
+                                      <li>
+                                        <div class="right-content">
+                                          <h5><?= htmlspecialchars($answer['name']); ?>&nbsp;-&nbsp;<span><?= date("d/m/Y H:i", strtotime($answer['created_at'])); ?></span></h5>
+                                          <p><?= nl2br(htmlspecialchars($answer['text'])); ?></p>
+                                        </div>
+                                      </li>
+                                    <?php } ?>
+                                  </ul>
+                                
+                              <?php } ?>
+                            </div>
                           </div>
-                        </li>
+                        </div>
+                        <hr>
+                        <br>
+                        
                       <?php } ?>
                     </ul>
                   <?php } ?>
