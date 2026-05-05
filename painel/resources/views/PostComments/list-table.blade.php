@@ -42,6 +42,17 @@
             <td>
                 @if ($Comment->comment_answer_id != null)
                     <span class="badge badge-info">RESPOSTA</span>
+                @else
+                    <button
+                        type="button"
+                        class="badge badge-secondary border-0 p-2 reply-comment-btn"
+                        data-toggle="modal"
+                        data-target="#replyCommentModal"
+                        data-comment-id="{{$Comment->id}}"
+                        data-post-id="{{$Comment->post_id}}"
+                    >
+                        Responder
+                    </button>
                 @endif
             </td>
         </tr>

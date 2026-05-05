@@ -80,4 +80,5 @@ Route::get('PostComments/{postId}', [PostCommentController::class, 'index']);
 Route::get('PostComments/{postId}/page/{pageId}', [PostCommentController::class, 'indexPage']);
 Route::post('PostComments/approve-comment/{commentId}/fromPost/{postId}', [PostCommentController::class, 'approveComment']);
 Route::post('PostComments/reject-comment/{commentId}/fromPost/{postId}', [PostCommentController::class, 'rejectComment']);
+Route::post('PostComments/reply-comment/{commentId}/fromPost/{postId}', [PostCommentController::class, 'replyComment']);
 Route::delete('PostComments/delete/{id}', [PostCommentController::class, 'delete']);
