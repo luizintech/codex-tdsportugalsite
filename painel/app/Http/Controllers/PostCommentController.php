@@ -110,4 +110,40 @@ class PostCommentController extends BaseController
             LogHelper::write($e, LogType::Error);
         }
     }
+
+    public function replyComment($commentId, $postId, Request $request) {
+        if (!Auth::check()) return Redirect::to('login');
+
+        $validation = Validator::make($request->all(), [
+            'reply_text' => 'required|string|max:4000'
+        ]);
+
+        if ($validation->fails()) {
+            return Redirect::to('PostComments/' . $postId)
+                ->withErrors($validation)
+                ->withInput();
+        }
+
+        try {
+            $entity = [
+                'post_id' => $postId,
+                'name' => 'admin',
+                'email' => 'admin@admin',
+                'text' => $request->reply_text,
+                'approved' => true,
+                'comment_answer_id' => $commentId
+            ];
+
+            $result = $this->PostCommentRepository->add($entity);
+            LogHelper::write("Resposta criada para PostComment ID:[".$commentId."]", LogType::Info);
+
+            if ($result->success)
+                return Redirect::to('PostComments/' . $postId);
+
+        } catch (Exception $e) {
+            LogHelper::write($e, LogType::Error);
+        }
+
+        return Redirect::to('PostComments/' . $postId);
+    }
 }

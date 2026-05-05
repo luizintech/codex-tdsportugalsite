@@ -38,6 +38,33 @@
     
   </div>
 
+  <div class="modal fade" id="replyCommentModal" tabindex="-1" role="dialog" aria-labelledby="replyCommentModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <form method="POST" id="replyCommentForm">
+          {{ csrf_field() }}
+          <div class="modal-header">
+            <h5 class="modal-title" id="replyCommentModalLabel">Responder comentário</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="reply_text">Resposta</label>
+              <textarea class="form-control" id="reply_text" name="reply_text" rows="4" maxlength="4000" required></textarea>
+            </div>
+            <small class="text-muted">A resposta será gravada com name <b>admin</b> e email <b>admin@admin</b>.</small>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Salvar resposta</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   @include('shared/pagination')
 
 @endsection
@@ -51,6 +78,14 @@
         if (confirm('Tem certeza?')) {
             $(e.target).closest('form').submit()
         }
+    });
+
+    $('.reply-comment-btn').click(function(){
+      const commentId = $(this).data('comment-id');
+      const postId = $(this).data('post-id');
+      const action = "{{url('')}}/PostComments/reply-comment/" + commentId + "/fromPost/" + postId;
+      $('#replyCommentForm').attr('action', action);
+      $('#reply_text').val('');
     });
 
   </script>
