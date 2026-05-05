@@ -229,7 +229,8 @@
                       </div>
                       <div class="col-lg-12">
                         <fieldset>
-                          <textarea name="text" rows="6" id="text" placeholder="Digite seu comentário" required=""><?= htmlspecialchars($inputText); ?></textarea>
+                          <textarea name="text" rows="6" id="text" 
+                            placeholder="Digite seu comentário" required=""><?= htmlspecialchars($inputText); ?></textarea>
                         </fieldset>
                       </div>
                       <div class="col-lg-12">
