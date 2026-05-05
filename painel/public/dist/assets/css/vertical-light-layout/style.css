@@ -26650,3 +26650,10 @@ div.tagsinput span.tag a {
 }
 
 .maxwidth-btns-25px { max-width: 25px; }
+
+.comment-text-limit {
+    max-width: 200px;
+    word-wrap: break-word;
+    white-space: normal!important;
+    overflow-wrap: break-word;
+}

@@ -39,7 +39,8 @@
         <div class="collapse" id="users">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Users">Usuários</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{url('')}}/configurations">Configurações</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Logs">Logs</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Configurations">Configurações</a></li>
           </ul>
         </div>
       </li>
@@ -55,7 +56,6 @@
 			      <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Categories">Categorias</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Medias">Midias</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Posts">Artigos</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{url('')}}/Logs">Logs</a></li>
           </ul>
         </div>
       </li>

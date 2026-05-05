@@ -1,34 +1,27 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Label;
+use App\Models\PostComment;
 use App\Dtos\Result;
 
-class LabelRepository {
+class PostCommentRepository {
 
-    public function listAll(): Result {
+    public function listAllFromPost($postId, $pageId, $size): Result {
         $result = new Result;
-        $result->objectResult = Label::all();
+
+        $result->total = PostComment::count();
+
+        $result->objectResult = PostComment::where('post_id', $postId)
+            ->orderBy('created_at', 'DESC')
+            ->skip(($pageId - 1) * $size)
+            ->take($size)
+            ->get();
 
         if (!$result->objectResult) {
             $result->messages = "Não foi possível listar os objetos";
         } else {
             $result->success = true;
         }
-
-        return $result;
-    }
-
-    public function getById($id): Result{
-        $result = new Result;
-        $result->objectResult = Label::find($id);
-
-        if (!$result->objectResult) {
-            $result->messages = "Não foi possível recuperar o objeto";
-        } else {
-            $result->success = true;
-        }
-
         return $result;
     }
 
@@ -40,7 +33,7 @@ class LabelRepository {
             return $result;
         }
 
-        $current = new Label();
+        $current = new PostComment();
         $current->fill($entity);
         $current->save();
 
@@ -53,7 +46,7 @@ class LabelRepository {
     public function update($id, $entity): Result{
         $result = new Result;
 
-        $current = Label::find($id);
+        $current = PostComment::find($id);
         if (!$current) {
             $result->messages = "Não encontrado.";
             return $result;
@@ -69,7 +62,7 @@ class LabelRepository {
     public function delete($id): Result {
         $result = new Result;
 
-        $current = Label::find($id);
+        $current = PostComment::find($id);
         if (!$current) {
             $result->messages = "Não encontrado.";
             return $result;
@@ -82,14 +75,22 @@ class LabelRepository {
     }
 
     //Other methods
-    public function listAllPaging($YoutubeGrowth, $size): Result {
+    public function total(): Result {
+        $result = new Result;
+        $result->total = PostComment::count();
+        $result->success = true;
+        return $result;
+    }
+
+    public function listAllApprovedForPost($postId, $pageId, $size): Result {
         $result = new Result;
 
-        $result->total = Label::count();
+        $result->total = PostComment::count();
 
-        $result->objectResult = Label::orderBy('created_at', 'DESC')
-            ->skip(($YoutubeGrowth - 1) * $size)
-            ->take($size)
+        $result->objectResult = PostComment::where('approved', 1)
+            ->where('post_id', $postId)
+            ->orderBy('created_at', 'DESC')
+                ->thenBy('id', 'DESC')
             ->get();
 
         if (!$result->objectResult) {
@@ -97,13 +98,6 @@ class LabelRepository {
         } else {
             $result->success = true;
         }
-        return $result;
-    }
-
-    public function total(): Result {
-        $result = new Result;
-        $result->total = Label::count();
-        $result->success = true;
         return $result;
     }
 }

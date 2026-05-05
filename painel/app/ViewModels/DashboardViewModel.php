@@ -3,7 +3,7 @@
 namespace App\ViewModels;
 
 class DashboardViewModel{
-    public $totalPages;
+    public $totalErrors;
     public $totalCategories;
     public $totalLabels;
     public $totalPosts;

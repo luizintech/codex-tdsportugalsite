@@ -11,8 +11,8 @@
     <tbody>
     @foreach ($viewModel->objectReturn as $Media)
         <tr>
-            <td class="maxwidth-btns-25px">{{$Media->id}}</td> 
-            <td class="maxwidth-btns-25px">
+            <td>{{$Media->id}}</td> 
+            <td>
                 <form method="POST" action="{{url('')}}/Medias/delete/{{$Media->id}}">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}

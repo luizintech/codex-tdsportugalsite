@@ -11,16 +11,16 @@
         </div>
         <div class="d-md-flex row m-0 quick-action-btns" role="group" aria-label="Quick action buttons">
           <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-            <a href="{{url('')}}/painel/users" class="btn px-0"> <i class="icon-user me-2"></i> Gerencias usuários</a>
+            <a href="{{url('')}}/Users" class="btn px-0"> <i class="icon-user me-2"></i> Gerencias usuários</a>
           </div>
           <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-            <a href="{{url('')}}/painel/Posts/create" class="btn px-0"><i class="icon-docs me-2"></i> Criar um artigo</a>
+            <a href="{{url('')}}/Posts/create" class="btn px-0"><i class="icon-docs me-2"></i> Criar um artigo</a>
           </div>
           <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-            <a href="{{url('')}}/painel/Pages/create" class="btn px-0"><i class="icon-folder me-2"></i> Criar uma página</a>
+            <a href="{{url('')}}/Labels/create" class="btn px-0"><i class="icon-folder me-2"></i> Criar um rótulo</a>
           </div>
           <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-            <a href="{{url('')}}/painel/Categories/create" class="btn px-0"><i class="icon-book-open me-2"></i>Criar uma categoria</a>
+            <a href="{{url('')}}/Categories/create" class="btn px-0"><i class="icon-book-open me-2"></i>Criar uma categoria</a>
           </div>
         </div>
       </div>
@@ -53,17 +53,6 @@
 
             <div class="col-md-6 col-xl report-inner-card">
               <div class="inner-card-text">
-                <span class="report-title">PÁGINAS(S)</span>
-                <h4>{{$viewModel->totalPages}}</h4>
-                <span class="report-count">&nbsp;</span>
-              </div>
-              <div class="inner-card-icon bg-danger">
-                <i class="icon-briefcase"></i>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-xl report-inner-card">
-              <div class="inner-card-text">
                 <span class="report-title">TÓPICO(S)</span>
                 <h4>{{$viewModel->totalLabels}}</h4>
                 <span class="report-count">&nbsp;</span>
@@ -83,6 +72,18 @@
                 <i class="icon-diamond"></i>
               </div>
             </div>
+
+            <div class="col-md-6 col-xl report-inner-card">
+              <div class="inner-card-text">
+                <span class="report-title">ERRO(S)</span>
+                <h4>{{$viewModel->totalErrors}}</h4>
+                <span class="report-count">&nbsp;</span>
+              </div>
+              <div class="inner-card-icon bg-danger">
+                <i class="icon-briefcase"></i>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

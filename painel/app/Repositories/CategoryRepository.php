@@ -99,4 +99,11 @@ class CategoryRepository {
         }
         return $result;
     }
+
+    public function total(): Result {
+        $result = new Result;
+        $result->total = Category::count();
+        $result->success = true;
+        return $result;
+    }
 }

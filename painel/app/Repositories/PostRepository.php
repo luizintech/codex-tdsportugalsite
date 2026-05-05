@@ -141,4 +141,11 @@ class PostRepository {
         }
         return $result;
     }
+
+    public function total(): Result {
+        $result = new Result;
+        $result->total = Post::count();
+        $result->success = true;
+        return $result;
+    }
 }

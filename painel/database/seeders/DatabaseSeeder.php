@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Configuration;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,9 +14,6 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         if (Env('APP_ENV') == 'develop') {
@@ -23,9 +21,12 @@ class DatabaseSeeder extends Seeder
         } else {
             $this->DumpSystemUsersTable();
         }
+
+        $this->DumpConfigurationsTable();
     }
 
-    private function DumpWebTestsSystemUsersTable() {
+    private function DumpWebTestsSystemUsersTable()
+    {
         $usuarioAdm = User::where('email', 'admin@admin')->first();
         if (!$usuarioAdm){
             DB::table('users')->insert([
@@ -42,7 +43,8 @@ class DatabaseSeeder extends Seeder
         }
     }
 
-    private function DumpSystemUsersTable() {
+    private function DumpSystemUsersTable() 
+    {
 
         $dumpUser = Env('adminUser');
         $dumpUserPwd = Env('adminPassword');
@@ -61,5 +63,34 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => date("Y-m-d  H:i:s")
             ]);
         }
+    }
+
+    private function DumpConfigurationsTable() 
+    {
+
+        //Site title
+        $config = Configuration::where('key', 'WEBSITE_TITLE')->first();
+        if (!$config){
+            DB::table('configuration')->insert([
+                'id' => 1,
+                'key' => 'WEBSITE_TITLE',
+                'value' => 'Tudo Sobre Portugal',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d  H:i:s")
+            ]);
+        }
+
+        //Site description
+        $config = Configuration::where('key', 'WEBSITE_META_DESCRIPTION')->first();
+        if (!$config){
+            DB::table('configuration')->insert([
+                'id' => 2,
+                'key' => 'WEBSITE_META_DESCRIPTION',
+                'value' => 'Tudo sobre Morar, Visitar ou Investir em Portugal, Nacionalidade Portuguesa, vistos de residência, documentação, custos de vida, como empreender.',
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d  H:i:s")
+            ]);
+        }
+
     }
 }

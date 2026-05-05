@@ -1,14 +1,14 @@
 <?php
 namespace App\Repositories;
 
-use App\Models\Label;
+use App\Models\Configuration;
 use App\Dtos\Result;
 
-class LabelRepository {
+class ConfigurationRepository {
 
     public function listAll(): Result {
         $result = new Result;
-        $result->objectResult = Label::all();
+        $result->objectResult = Configuration::all();
 
         if (!$result->objectResult) {
             $result->messages = "Não foi possível listar os objetos";
@@ -21,7 +21,7 @@ class LabelRepository {
 
     public function getById($id): Result{
         $result = new Result;
-        $result->objectResult = Label::find($id);
+        $result->objectResult = Configuration::find($id);
 
         if (!$result->objectResult) {
             $result->messages = "Não foi possível recuperar o objeto";
@@ -32,20 +32,15 @@ class LabelRepository {
         return $result;
     }
 
-    public function add($entity): Result{
+    public function getByKey($key): Result{
         $result = new Result;
+        $result->objectResult = Configuration::where('key', $key);
 
-        if (!$entity) {
-            $result->messages = "Parâmetro não preenchido.";
-            return $result;
-        }
-
-        $current = new Label();
-        $current->fill($entity);
-        $current->save();
-
-        if ($current->id > 0)
+        if (!$result->objectResult) {
+            $result->messages = "Não foi possível recuperar o objeto";
+        } else {
             $result->success = true;
+        }
 
         return $result;
     }
@@ -53,7 +48,7 @@ class LabelRepository {
     public function update($id, $entity): Result{
         $result = new Result;
 
-        $current = Label::find($id);
+        $current = Configuration::find($id);
         if (!$current) {
             $result->messages = "Não encontrado.";
             return $result;
@@ -61,21 +56,6 @@ class LabelRepository {
 
         $current->fill($entity);
         $current->save();
-        $result->success = true;
-
-        return $result;
-    }
-
-    public function delete($id): Result {
-        $result = new Result;
-
-        $current = Label::find($id);
-        if (!$current) {
-            $result->messages = "Não encontrado.";
-            return $result;
-        }
-
-        $current->delete();
         $result->success = true;
 
         return $result;
@@ -85,9 +65,9 @@ class LabelRepository {
     public function listAllPaging($YoutubeGrowth, $size): Result {
         $result = new Result;
 
-        $result->total = Label::count();
+        $result->total = Configuration::count();
 
-        $result->objectResult = Label::orderBy('created_at', 'DESC')
+        $result->objectResult = Configuration::orderBy('created_at', 'DESC')
             ->skip(($YoutubeGrowth - 1) * $size)
             ->take($size)
             ->get();
@@ -97,13 +77,6 @@ class LabelRepository {
         } else {
             $result->success = true;
         }
-        return $result;
-    }
-
-    public function total(): Result {
-        $result = new Result;
-        $result->total = Label::count();
-        $result->success = true;
         return $result;
     }
 }

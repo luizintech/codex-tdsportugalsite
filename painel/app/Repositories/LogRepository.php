@@ -99,4 +99,12 @@ class LogRepository {
 
         return $result;
     }
+
+    public function total(): Result {
+        $result = new Result;
+        $result->total = Log::where('type', 1)
+            ->count();
+        $result->success = true;
+        return $result;
+    }
 }

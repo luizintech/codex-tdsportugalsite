@@ -4,8 +4,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LabelController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LogController;
 use Illuminate\Support\Facades\Route;
@@ -54,7 +56,6 @@ Route::get('Posts/edit/{id}', [PostController::class, 'edit']);
 Route::post('Posts/edit/{id}', [PostController::class, 'update']);
 Route::delete('Posts/delete/{id}', [PostController::class, 'delete']);
 
-
 //Users
 Route::get('Users', [UserController::class, 'index']);
 Route::get('Users/page/{pageId}', [UserController::class, 'indexPage']);
@@ -67,3 +68,16 @@ Route::delete('Users/delete/{id}', [UserController::class, 'delete']);
 //Logs
 Route::get('Logs', [LogController::class, 'index']);
 Route::get('Logs/page/{pageId}', [LogController::class, 'indexPage']);
+
+//Configurations
+Route::get('Configurations', [ConfigurationController::class, 'index']);
+Route::get('Configurations/page/{pageId}', [ConfigurationController::class, 'indexPage']);
+Route::get('Configurations/edit/{id}', [ConfigurationController::class, 'edit']);
+Route::post('Configurations/edit/{id}', [ConfigurationController::class, 'update']);
+
+//Post Comments
+Route::get('PostComments/{postId}', [PostCommentController::class, 'index']);
+Route::get('PostComments/{postId}/page/{pageId}', [PostCommentController::class, 'indexPage']);
+Route::post('PostComments/approve-comment/{commentId}/fromPost/{postId}', [PostCommentController::class, 'approveComment']);
+Route::post('PostComments/reject-comment/{commentId}/fromPost/{postId}', [PostCommentController::class, 'rejectComment']);
+Route::delete('PostComments/delete/{id}', [PostCommentController::class, 'delete']);
